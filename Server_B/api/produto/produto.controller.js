@@ -5,7 +5,7 @@ const router = express.Router();
 const produtoHandler = require("./produto.handler");
 
 router.post("/cadastrar", (req, res) => {
-    produtoHandler.cadastrarProduto();
+    res.json(produtoHandler.cadastrarProduto(req.body));
 })
 
 module.exports = router;

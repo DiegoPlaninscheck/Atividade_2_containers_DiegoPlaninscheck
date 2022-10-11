@@ -3,31 +3,41 @@ let listaPessoa = [
     { email: "thiago", senha: "321" },
 ]
 
+let logado = {};
+
 function login({ email, senha }) {
     for (const pessoa of listaPessoa) {
         if (email == pessoa.email) {
             if (senha == pessoa.senha) {
-                console.log(pessoa);
+                logado = {
+                    email: email,
+                    senha: senha,
+                }
                 return pessoa;
             }
         }
     }
+    return { message: "Login incorreto!" }
 }
 
 function cadastrarPessoa({ email, senha }) {
-    for (const pessoa of listaPessoa) {
-        if (email == pessoa.email) {
-            if (senha == pessoa.senha) {
-                console.log("Ja existe");
-            } else {
-                let pessoa = {
-                    email: email,
-                    senha: senha
-                }
-                listaPessoa.push(pessoa);
+    for (const p of listaPessoa) {
+        if (email == p.email && senha == p.senha) {
+            return { message: "Pessoa já existente! " }
+        } else {
+            let pessoa = {
+                email: email,
+                senha: senha
             }
+            listaPessoa.push(pessoa);
+            return pessoa
         }
     }
 }
 
-module.exports = { login, cadastrarPessoa }
+
+function logado() {
+    return logado;
+}
+
+module.exports = { login, cadastrarPessoa, logado }
